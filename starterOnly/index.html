@@ -57,10 +57,11 @@
           <span class="close"></span>
           <div class="modal-body">
             <form
+              id="formulaire"
               name="reserve"
               action="index.html"
               method="get"
-              onsubmit="return validate();"
+              onsubmit="return validate()" 
             >
               <div
                 class="formData">
@@ -200,7 +201,7 @@
                 <br>
               </div>
               <input
-                class="btn-submit"
+                id="btn-submit"
                 type="submit"
                 class="button"
                 value="C'est parti"
@@ -209,6 +210,7 @@
           </div>
         </div>
       </div>
+        <div id="confirmation">Merci, votre réservation a bien été reçue !</div>
     </main>
     <footer>
       <p class="copyrights">
