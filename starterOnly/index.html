@@ -53,7 +53,7 @@
       </div>
 
       <div class="bground">
-        <div class="content">
+        <div id="content">
           <span class="close"></span>
           <div class="modal-body">
             <form
@@ -81,7 +81,6 @@
                   type="text"
                   id="lastname"
                   name="lastname"
-  return false; 
                 /><span class="error" id="error_lastname">Veuillez entrer deux caractères ou plus pour le champ du nom.</span><br>
               </div>
               <div
@@ -109,9 +108,9 @@
                 <label for=quantity>À combien de tournois GameOn avez-vous déjà participé ?</label><br>
                 <input type="number" class="text-control" id="quantity" name="quantity" min="0" max="99"><span class="error" id ="error_quantity">Veuillez indiquer une quantité.</span>
               </div>
-              <p class="text-label">Quelles villes ?</p>
               <div
                 class="formData">
+                <p class="text-label">Quelles villes ?</p>
                 <input
                   class="checkbox-input"
                   type="radio"
@@ -207,11 +206,11 @@
                 class="button"
                 value="C'est parti"
               />
+              <input id="btn-close" type ="button" class="button" value="Fermer"/>
             </form>
           </div>
         </div>
       </div>
-        <div id="confirmation">Merci, votre réservation a bien été reçue !</div>
     </main>
     <footer>
       <p class="copyrights">

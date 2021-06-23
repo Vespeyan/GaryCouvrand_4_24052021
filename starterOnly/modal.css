@@ -18,7 +18,7 @@ body {
   font-family: var(--font-default);
   font-size: 18px;
   max-width: 1300px;
-  min-width: 320px;
+  min-width: 345px;
   margin: 0 auto;
 }
 
@@ -44,7 +44,7 @@ img {
 .topnav a {
   float: left;
   display: block;
-  color: #000000;
+  color: red;
   text-align: center;
   padding: 12px 12px;
   margin: 5px;
@@ -70,7 +70,12 @@ img {
 }
 
 @media screen and (max-width: 768px) {
-  .topnav a {display: none;}
+  .main-navbar {
+    margin-top: 15px;
+  }
+  .topnav a {
+    display: none;
+  }
   .topnav a.icon {
     float: right;
     display: block;
@@ -78,11 +83,13 @@ img {
 }
 
 @media screen and (max-width: 768px) {
-  .topnav.responsive {position: relative;}
+  .topnav.responsive {
+    position: relative;
+  }
   .topnav.responsive .icon {
     position: absolute;
     right: 0;
-    top: 0;
+    top: 15px;
   }
   .topnav.responsive a {
     float: none;
@@ -93,7 +100,7 @@ img {
 
 
 
- @media screen and (max-width: 540px) {
+ @media screen and (max-width: 500px) {
   .topnav a {display: none;}
   .topnav a.icon {
     float: right;
@@ -101,6 +108,8 @@ img {
     margin-top: -15px;
   }
 } 
+
+
 
 main {
   font-size: 130%;
@@ -170,9 +179,10 @@ main {
   background-color: rgba(26, 39, 156, 0.4);
 }
 
-.content {
+#content {
   margin: 5% auto;
   width: 100%;
+  min-height: 740px;
   max-width: 500px;
   animation-name: modalopen;
   animation-duration: var(--modal-duration);
@@ -184,6 +194,12 @@ main {
   padding-top: 10px;
 }
 
+.confirmation2 {
+  margin-bottom: 280px;
+  margin-top: 280px;
+  margin-left: 20px;
+  margin-right: 20px;
+}
 .modal-body {
   padding: 15px 8%;
   margin: 15px auto;
@@ -206,25 +222,6 @@ input {
   font-size: 12px;
   color: red;
   display : none;
-}
-#confirmation {
-  display: none;
-  text-align: center;
-  z-index: 1;
-  width: 300px;
-  height: 60px;
-  min-height: 50px;
-  font-weight: 100;
-  font-size: 0.7em;
-  border-radius: 15px;
-  padding-top: 0.5em;
-  background-color: rgb(94, 185, 94);
-  color: white;
-  position: fixed;
-  bottom: 10px;
-  margin: auto;
-  left: 0;
-  right: 0;
 }
 
 .text-control {
@@ -360,6 +357,19 @@ input[data-error]::after {
   cursor: pointer;
   border: 0;
 }
+
+#btn-close {
+  background: #fe142f;
+  display: none;
+  margin: 0 auto;
+  border-radius: 7px;
+  font-size: 1rem;
+  padding: 12px 82px;
+  color: #fff;
+  cursor: pointer;
+  border: 0;
+}
+
 /* custom select styles */
 .custom-select {
   position: relative;
@@ -432,7 +442,6 @@ input[data-error]::after {
   font-size: 16px;
 }
 .hero-section {
-  min-height: 93vh;
   border-radius: 10px;
   display: grid;
   grid-template-columns: repeat(12, 1fr);
@@ -442,32 +451,30 @@ input[data-error]::after {
 }
 .hero-content {
   padding: 51px 67px;
-  grid-column: span 4;
+  grid-column: span 5;
   background: #232323;
   color: #fff;
   position: relative;
   text-align: left;
-  min-width: 424px;
 }
 .hero-content::after {
   content: "";
   width: 100%;
   height: 100%;
   background: #232323;
-  position: absolute;
-  right: -80px;
-  top: 0;
+  
 }
 .hero-content > * {
   position: relative;
   z-index: 1;
 }
 .hero-headline {
-  font-size: 6rem;
+  font-size: 5rem;
   font-weight: normal;
+  white-space: nowrap;
 }
 .hero-text {
-  width: 146%;
+  width: 100%;
   font-weight: normal;
   margin-top: 57px;
   padding: 0;
@@ -481,7 +488,7 @@ input[data-error]::after {
   margin-top: 59px;
 }
 .hero-img {
-  grid-column: span 8;
+  grid-column: span 7;
 }
 .hero-img img {
   width: 100%;
@@ -522,6 +529,7 @@ footer {
   }
   .hero-headline {
     font-size: 3.5rem;
+    font-weight: bolder;
     white-space: normal;
   }
   .hero-text {
@@ -542,15 +550,46 @@ footer {
     text-align: center;
   }
 }
+@media screen and (max-width: 500px) {
+  .bground {
+    background-color: white;
+    }
 
-@media screen and (max-width: 450px) {
-  .hero-content {
-    min-width: 0;
+  .topnav {
+    z-index: 2;
+    background-color: white;
+    margin-left: 0;
+    margin-top: 0;
+    margin-bottom: 0;
+    padding-top: 3.5%;
+    padding-left: 3.5%;
+    padding-bottom: 3.5%;
   }
+
+  #content {
+    top: 50px;
+    z-index: 10;
+  }
+  .hero-content {
+    padding: 0;
+    min-width: none;
+  }
+  .hero-text {
+    font-size: 16px;
+    margin: 0;
+    }
 
   .hero-headline {
-    font-size: 2em;
+    font-size: 40px;
+    font-weight: bolder;
+    margin: 0;
+    margin-bottom : 15px;
   }
+
+  footer {
+    margin-top: -60px;
+  }
+}
 
 @keyframes modalopen {
   from {

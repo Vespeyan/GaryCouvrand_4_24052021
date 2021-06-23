@@ -16,6 +16,7 @@ const formulaire = document.getElementById("formulaire");
 const birthDate = document.getElementById("birthdate");
 const confirmation = document.getElementById("confirmation");
 const submitButton = document.getElementById("btn-submit");
+const closeButton = document.getElementById("btn-close");
 const firstNameInput = document.getElementById("firstname");
 const lastNameInput = document.getElementById("lastname");
 const emailInput = document.getElementById("email");
@@ -29,6 +30,7 @@ modalBtn.forEach((btn) => btn.addEventListener("click", launchModal));
 // launch modal form
 function launchModal() {
   modalbg.style.display = "block";
+  document.body.style.overflow = "hidden";
 }
 
 // close modal event
@@ -39,19 +41,20 @@ function closeModal() {
   modalbg.style.display = "none";
 }
 
-// lancement de l'événement de vérification et de soumission du formulaire
-submitButton.addEventListener("click", validation);
-
+//
+submitButton.addEventListener("click", validate);
 
 
 // fonction vérifiant si un prénom de plus de deux caractères a bien été rentré
 function checkFirstName () {
-  let firstName = document.getElementById("firstname").value;
-  if (firstName.length < 2) {
+  let firstName = document.getElementById("firstname");
+  if (firstName.value.length < 2) {
   document.getElementById("error_firstname").style.display = "inline";
+  firstName.style.borderColor = "red";
   return false; 
 } else { 
     document.getElementById("error_firstname").style.display = "none";
+    firstName.style.borderColor = "";
     return true;
   }
 }
@@ -62,12 +65,14 @@ firstNameInput.addEventListener("focusout", checkFirstName);
 
 // fonction vérifiant si un nom de plus de deux caractères a bien été rentré
 function checkLastName () {
-  let lastName = document.getElementById("lastname").value;
-  if (lastName.length < 2) {
+  let lastName = document.getElementById("lastname");
+  if (lastName.value.length < 2) {
   document.getElementById("error_lastname").style.display = "inline";
+  lastName.style.borderColor = "red";
   return false;
 } else {
     document.getElementById("error_lastname").style.display = "none";
+    lastName.style.borderColor = "";
     return true;
   }
 }
@@ -77,12 +82,14 @@ lastNameInput.addEventListener("focusout", checkLastName);
 
 // fonction vérifiant si un email a bien été rentré, ainsi que sa conformité
 function checkEmail () {
-  let email = document.getElementById("email").value;
-  if (/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(email)) {
+  let email = document.getElementById("email");
+  if (/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(email.value)) {
   document.getElementById("error_email").style.display = "none";
+  email.style.borderColor = "";
   return true;
 } else {
     document.getElementById("error_email").style.display = "inline";
+    email.style.borderColor = "red";
     return false;
   }
 }
@@ -92,12 +99,14 @@ emailInput.addEventListener("focusout", checkEmail);
 
 // fonction vérifiant si une date de naissance a été rentrée, ainsi que sa conformité
 function checkBirthDate () {
-  let birthDate = document.getElementById("birthdate").value;
-  if (birthDate == "") {
+  let birthDate = document.getElementById("birthdate");
+  if (birthDate.value == "") {
   document.getElementById("error_birthdate").style.display = "inline";
+  birthDate.style.borderColor = "red";
   return false;
 } else {
     document.getElementById("error_birthdate").style.display = "none";
+    birthDate.style.borderColor = "";
     return true;
   }
 }
@@ -107,12 +116,14 @@ birthDateInput.addEventListener("focusout", checkBirthDate);
 
 // fonction vérifiant si un nombre a été saisi dans la case des tournois
 function checkQuantity () {
-  let quantity = document.getElementById("quantity").value;
-  if (quantity == "") {
+  let quantity = document.getElementById("quantity");
+  if (quantity.value == "") {
   document.getElementById("error_quantity").style.display = "inline";
+  quantity.style.borderColor = "red";
   return false;
 } else {
     document.getElementById("error_quantity").style.display = "none";
+    quantity.style.borderColor = "";
     return true;
   }
 }
@@ -131,7 +142,6 @@ function checkRadio () {
   }
 }
 
-
 // fonction vérifiant si les conditions d'utilisation ont été lues et acceptées
 function checkConditions () {
   if (document.getElementById("checkbox1").checked) {
@@ -146,16 +156,10 @@ function checkConditions () {
 // écoute de l'input et lancement de la fonction
 conditionsInput.addEventListener("input", checkConditions);
 
-/* 
-fonction servant à empêcher la soumission automatique du formulaire, 
-sans quoi la page se rafraîchit de suite, et empêche l'apparition du message de validation
-*/
-function validate() {
-  return false;
-}
 
 // fonction servant à valider et soumettre le formulaire s'il est valide
-function validation() {
+function validate(e) {
+  e.preventDefault();
   /* 
   appel de toutes les fonctions de vérification pour qu'un message d'erreur
   apparaisse sous CHAQUE input si nécessaire
@@ -169,25 +173,30 @@ function validation() {
   checkConditions();
 
       //  on vérifie que toutes les conditions sont remplies
-      if (checkFirstName() == true 
-      && checkLastName() == true  
-      && checkEmail() == true 
-      && checkBirthDate() == true 
-      && checkQuantity() == true 
-      && checkRadio() == true 
-      && checkConditions() == true) {
+      if (checkFirstName() 
+        && checkLastName()  
+        && checkEmail() 
+        && checkBirthDate()
+        && checkQuantity() 
+        && checkRadio() 
+        && checkConditions() == true) {
         // le formulaire disparaît et le message de confirmation apparaît
-        modalbg.style.display = "none";
-        confirmation.style.display = "block";
-        // après 2 secondes, le message de confirmation disparaît, et le formulaire est soumis
-        setTimeout(function() {
-          confirmation.style.display = "none";
-          formulaire.submit();
-        }, 2000);
-        } else {
+        let formData = document.getElementsByClassName("formData");
+        //while (formData[0]) {
+        //formData[0].parentNode.removeChild(formData[0]); 
+        //}
+        for (let j = 0; j < formData.length; j++) {
+          formData[j].style.display = "none";
+        }
+        submitButton.insertAdjacentHTML("beforebegin", '<p class ="confirmation2">Merci, votre réservation a bien été reçue !</p>');
+        submitButton.style.display = "none";
+        closeButton.style.display = "block";
+        closeButton.addEventListener("click", closeModal);
+       } else {
         return false;
           }
 }
+
 
 
 
