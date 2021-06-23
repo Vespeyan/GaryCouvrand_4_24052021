@@ -41,7 +41,7 @@ function closeModal() {
   modalbg.style.display = "none";
 }
 
-//
+// écoute du bouton de soumission et lancement de la fonction de validation
 submitButton.addEventListener("click", validate);
 
 
@@ -182,9 +182,6 @@ function validate(e) {
         && checkConditions() == true) {
         // le formulaire disparaît et le message de confirmation apparaît
         let formData = document.getElementsByClassName("formData");
-        //while (formData[0]) {
-        //formData[0].parentNode.removeChild(formData[0]); 
-        //}
         for (let j = 0; j < formData.length; j++) {
           formData[j].style.display = "none";
         }
