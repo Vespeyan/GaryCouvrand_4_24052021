@@ -83,7 +83,7 @@ lastNameInput.addEventListener("focusout", checkLastName);
 // fonction vérifiant si un email a bien été rentré, ainsi que sa conformité
 function checkEmail () {
   let email = document.getElementById("email");
-  if (/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(email.value)) {
+  if (/^[\w-\.]+@([\w-]+\.)+[\w-]{2,}$/.test(email.value)) {
   document.getElementById("error_email").style.display = "none";
   email.style.borderColor = "";
   return true;
